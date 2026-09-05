@@ -67,4 +67,14 @@ public class BarberoService {
         barbero.setFotoUrl(fotoUrl);
         barberoRepository.save(barbero);
     }
+    public void eliminar(Long id) {
+    if (!barberoRepository.existsById(id)) {
+        throw new RuntimeException("Barbero no encontrado con el ID: " + id);
+    }
+    try {
+        barberoRepository.deleteById(id);
+    } catch (org.springframework.dao.DataIntegrityViolationException e) {
+        throw new RuntimeException("No se puede eliminar este barbero porque ya tiene citas asociadas. Considera desactivarlo en vez de eliminarlo.");
+    }
+}
 }

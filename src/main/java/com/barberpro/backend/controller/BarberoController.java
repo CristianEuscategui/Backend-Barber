@@ -55,4 +55,9 @@ public class BarberoController {
         barberoService.actualizarFoto(id, url);
         return ResponseEntity.ok(url);
     }
+    @DeleteMapping("/{id}")
+public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    barberoService.eliminar(id);
+    return ResponseEntity.noContent().build();
+}
 }
